@@ -1,0 +1,38 @@
+{% extends '../layout/_layout.html' %}
+{% load bootstrap5  %}
+
+{% block title %}
+    
+    {% if title %}
+        {{title}}
+    {% else %}
+        App
+    {% endif %}
+        
+{% endblock title %}
+
+
+{% block content %}
+<div class="m-0 pt-5 row justify-content-center align-items-center" >
+    <div class="col-auto p-5  text-center">
+        <div class="card">
+            <div class="card-header">
+                Categoria
+            </div>
+            <fom>
+                <div class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                </div>
+                <div class="card-footer ">
+                    <br/>
+                    {% buttons %}
+                        <a class="btn btn-primary btn-sm" href="#" >Registrar Categoria</a>
+                    {% endbuttons %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>    
+{% endblock  %}
+    

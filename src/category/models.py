@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
-
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 # Create your models here.
 
 class Category(models.Model):
@@ -19,16 +20,16 @@ class Category(models.Model):
         return self.slug
     
     
+
+
+def create_category_slug(sender,instance:Category,*args, **kwargs):
+    if instance.slug:
+        return
     
-class Sub_Category(models.Model):
-    id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
-    name = models.CharField(verbose_name="Nombre",max_length=150,null=False,blank=True)
-    slug = models.SlugField()
-    category = models.ForeignKey(Category,verbose_name="category",on_delete=models.CASCADE)
-    class Meta:
-        managed = True
-        verbose_name = 'sub_category'
-        verbose_name_plural = 'sub_categories'
-    
-    def __str__(self) -> str:
-        return self.slug
+    id = str(uuid.uuid4)
+    instance.slug = slugify('{}-{}'.format(
+        instance.name,id[:8]
+    ))
+
+
+pre_save.connect(create_category_slug,sender=Category)
