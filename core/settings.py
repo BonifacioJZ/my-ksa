@@ -43,6 +43,7 @@ LOCAL_APPS = [
     'src.category',
 ]
 THIRTY_PARTY = [
+    'bootstrap5',
 ]
 
 # Application definition
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/"/template"],
+        'DIRS': [BASE_DIR/"template"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
