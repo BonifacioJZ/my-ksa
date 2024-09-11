@@ -6,10 +6,12 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
-    name = models.CharField(verbose_name="Nombre",max_length=150,null=False,blank=False)
+    name = models.CharField(verbose_name="Nombre",max_length=150,blank=False,null=False)
     description = models.TextField(verbose_name="Descripcion",null=True, blank=True)
     guard_name = models.CharField(verbose_name="Guard Name",max_length=13,blank=False,null=False)
     slug = models.SlugField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
         managed = True

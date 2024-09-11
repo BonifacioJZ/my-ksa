@@ -15,19 +15,29 @@
 {% block content %}
 <div class="m-0 pt-5 row justify-content-center align-items-center" >
     <div class="col-auto p-5  text-center">
-        <div class="card">
-            <div class="card-header">
+        <div class="card ">
+            <div class="card-header bg-primary text-white">
                 Categoria
             </div>
-            <fom>
+            <form method='POST' action=".">
+                {% csrf_token %}
                 <div class="card-body">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
+                    <div class="row g-3" >
+                        <div class="col-md-6">
+                            {% bootstrap_field form.name %}
+                        </div> 
+                        <div class="col-md-6">
+                            {% bootstrap_field form.guard_name %}
+                        </div>
+                        <div class="col-12">
+                            {% bootstrap_field form.description %}
+                        </div> 
+                    </div>
                 </div>
                 <div class="card-footer ">
                     <br/>
                     {% buttons %}
-                        <a class="btn btn-primary btn-sm" href="#" >Registrar Categoria</a>
+                        <input class="btn btn-primary btn-sm" value="Registrar Categoria" type="submit" />
                     {% endbuttons %}
                 </div>
             </form>

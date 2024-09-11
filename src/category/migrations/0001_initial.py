@@ -17,9 +17,9 @@ class Migration(migrations.Migration):
             name='Category',
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=150, verbose_name='Nombre')),
+                ('name', models.CharField(max_length=150, verbose_name='Nombre',blank=False,null=False)),
                 ('description', models.TextField(blank=True, null=True, verbose_name='Descripcion')),
-                ('guard_name', models.CharField(max_length=13, verbose_name='Guard Name')),
+                ('guard_name', models.CharField(max_length=13, verbose_name='Guard Name',blank=False,null=False)),
                 ('slug', models.SlugField()),
             ],
             options={

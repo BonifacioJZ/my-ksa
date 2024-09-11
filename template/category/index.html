@@ -13,6 +13,14 @@
     
 {% block content %}
     
+    {% if messages %}
+    <div class="m-0 row justify-content-center align-items-center">
+        <div class="col-auto p-5 text-center">
+           {% include '../components/_alert.html' %}
+        </div>
+    </div>
+    {% endif %}
+        
     {% if category_list %}
     {% else %}
     <div class="m-0 pt-5 row justify-content-center align-items-center" >
