@@ -28,7 +28,7 @@ def create_category_slug(sender,instance:Category,*args, **kwargs):
     if instance.slug:
         return
     
-    id = str(uuid.uuid4)
+    id = str(uuid.uuid4())
     instance.slug = slugify('{}-{}'.format(
         instance.name,id[:8]
     ))

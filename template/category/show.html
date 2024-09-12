@@ -1,0 +1,46 @@
+{% extends '../layout/_layout.html' %}
+{% load bootstrap5  %}
+
+{% block title %}
+    
+    {% if title %}
+        {{title}}
+    {% else %}
+        "App"
+    {% endif %}
+        
+{% endblock title %}
+
+{% block content %}
+    <div class="m-0 row justify-content-start">
+        <div class=" col-auto p-5">
+            <figure>
+                <blockquote class="blockquote">
+                    <h4 class="display-6">{{category.name}}</h4>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    {{category.guard_name}}
+                </figcaption>                                
+            </figure>
+            <div class="m-0 row justify-content-end align-items-end">
+                <div class="col-auto text-center">
+                    <div class="btn-group ">
+                        <a href="{% url 'category_edit' category.slug %}" class="btn btn-warning">Editar</a>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <h4 class="display-6">Descripción</h4>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    {{category.description}}
+                </figcaption>                                
+            </figure>
+            <hr/>
+        </div>
+        
+    </div>
+{% endblock  %}
+    
