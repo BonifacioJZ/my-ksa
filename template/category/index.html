@@ -22,6 +22,45 @@
     {% endif %}
         
     {% if category_list %}
+   
+    <div class="m-0 p-5 row justify-content-center align-items-center">
+        <div class="col-9 p-5 text-start">
+            <div class="row">
+                <div class="col-4 text-center">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example"">
+                        <button type="button" class="btn btn-secondary ">Regresar</button>
+                        <button type="button" class="btn btn-primary">Nueva Categoria</button>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in category_list %}
+                    <tr>
+                        <th>
+                            {{category.id}}
+                        </th>
+                        <th>
+                            {{category.name}}
+                        </th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     {% else %}
     <div class="m-0 pt-5 row justify-content-center align-items-center" >
         <div class="col-auto p-5  text-center">
