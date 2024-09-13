@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from .views import CategoryListView,CategoryCreateView,CateagoryDetailView,CategoryUpdateView
+from .views import CategoryListView,CategoryCreateView,CateagoryDetailView,CategoryUpdateView,DeleteCategoryView
 from django.urls import path
 
 urlpatterns = [
@@ -22,5 +22,6 @@ urlpatterns = [
     path('new/',CategoryCreateView.as_view(),name="category_store"),
     path('<str:slug>/',CateagoryDetailView.as_view(),name="category_show"),
     path('<str:slug>/edit/',CategoryUpdateView.as_view(),name="category_edit"),
+    path('<str:slug>/delete/',DeleteCategoryView.as_view(),name="category_delete"),
     
 ]

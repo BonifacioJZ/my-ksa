@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.views.generic import ListView,CreateView,DetailView,UpdateView
+from django.views.generic import ListView,CreateView,DetailView,UpdateView,DeleteView
 from .form import CategoryForms
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -26,7 +26,7 @@ class CategoryCreateView(CreateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Category" 
+        context["title"] = "Categorias" 
         return context
     
     def post(self, request: HttpRequest, *args: str, **kwargs) -> HttpResponse:
@@ -44,11 +44,11 @@ class CateagoryDetailView(DetailView):
     model=CategoryForms.Meta.model
     template_name="category/show.html"
     queryset = CategoryForms.Meta.model.objects.all()
-    context_object_name = "category"
+    context_object_name = "categorias"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Category" 
+        context["title"] = "Categorias" 
         return context
     
     def get(self, request: HttpRequest, slug=None,*args, **kwargs) -> HttpResponse:
@@ -66,4 +66,62 @@ class CategoryUpdateView(UpdateView):
     model=CategoryForms.Meta.model
     form_class=CategoryForms
     queryset=CategoryForms.Meta.model.objects.all()
+    success_url = reverse_lazy('category_index')
+    
+    def get(self, request: HttpRequest,slug=None, *args, **kwargs) -> HttpResponse:
+        category = CategoryForms.Meta.model.objects.filter(slug=slug).first()
+        if category:
+            context = {
+                'category':category,
+                'form':self.form_class,
+            }
+            return render(request,self.template_name,context=context)
+        messages.error(request,message="No Existe la categoria")
+        return redirect(reverse_lazy("category_index"))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Categorias" 
+        return context
+    
+    def form_valid(self, form):
+        messages.success(self.request,message="La categoria fue actualizada exitosamente")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request,message="Error al Actualizar")
+        response = super().form_invalid(form)
+        return response
+    
+    
+    
+    
+    
+class DeleteCategoryView(DeleteView):
+    template_name="category/delete.html"
+    model=CategoryForms.Meta.model
+    success_url=reverse_lazy('category_index')
+    context_object_name="category"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Category" 
+        return context
+    
+    def get(self, request: HttpRequest,slug=None, *args, **kwargs) -> HttpResponse:
+        category = CategoryForms.Meta.model.objects.filter(slug=slug).first()
+        if category:
+            context = {
+                'category':category
+            }
+            return render(request,self.template_name,context=context)
+        messages.error(request,message="No Existe la categoria")
+        return redirect(reverse_lazy("category_index"))
+            
+    
+    def form_valid(self, form):
+        messages.success(request=self.request,message="La categoria se a eliminado correctamente")
+        return super().form_valid(form)
+    
+    
     

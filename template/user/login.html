@@ -1,0 +1,38 @@
+{% extends '../layout/_layout.html' %}
+{% load bootstrap5  %}
+
+{% block title %}
+        Login
+{% endblock title %}
+
+
+{% block content %}
+{% if messages %}
+<div class="m-0 row justify-content-center align-items-center">
+    <div class="col-auto p-1 text-center">
+       {% include '../components/_alert.html' %}
+    </div>
+</div>
+{% endif %}
+<div class="m-0 pt-4 row justify-content-center align-items-center" >
+    <div class="col-auto p-5  text-center">
+        <div class="card ">
+            <div class="card-header bg-primary text-white">
+                Login
+            </div>
+            <form method='POST' action=".">
+                {% csrf_token %}
+                <div class="card-body">
+                    {% bootstrap_form form %}
+                </div>
+                <div class="card-footer ">
+                    <br/>
+                    {% buttons %}
+                        <input class="btn btn-primary btn-sm" value="Login" type="submit" />
+                    {% endbuttons %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>    
+{% endblock  %}

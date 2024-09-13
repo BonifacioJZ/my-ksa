@@ -1,0 +1,37 @@
+{% extends '../layout/_layout.html' %}
+{% load bootstrap5  %}
+
+{% block title %}
+    
+    {% if title %}
+        {{title}}
+    {% else %}
+        "App"
+    {% endif %}
+        
+{% endblock title %}
+
+
+{% block content %}
+{% if messages %}
+<div class="m-0 row justify-content-center align-items-center">
+    <div class="col-auto p-1 text-center">
+       {% include '../components/_alert.html' %}
+    </div>
+</div>
+{% endif %}
+<div class="m-0 pt-5 row justify-content-center align-items-center" >
+    <div class="col-auto p-5  text-center">
+      <form method="POST" >
+        {% csrf_token %}
+        <h1 class="display-4">Esta seguro de eliminar la categoria {{category.name}} </h1> 
+        <hr>
+        <div class="btn-group btn-group-lg" role="group" aria-label="Basic mixed styles example">
+            <input class="btn btn-danger" type="submit" value="Si">
+            <a href="{% url 'category_index' %}" class="btn btn-secondary">No</a>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock content %}
+    
