@@ -40,11 +40,11 @@ class CategoryCreateView(CreateView):
         }
         return render(request,self.template_name,context=context)
 
-class CateagoryDetailView(DetailView):
+class CategoryDetailView(DetailView):
     model=CategoryForms.Meta.model
     template_name="category/show.html"
     queryset = CategoryForms.Meta.model.objects.all()
-    context_object_name = "categorias"
+    context_object_name = "Categorias"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,17 +67,6 @@ class CategoryUpdateView(UpdateView):
     form_class=CategoryForms
     queryset=CategoryForms.Meta.model.objects.all()
     success_url = reverse_lazy('category_index')
-    
-    def get(self, request: HttpRequest,slug=None, *args, **kwargs) -> HttpResponse:
-        category = CategoryForms.Meta.model.objects.filter(slug=slug).first()
-        if category:
-            context = {
-                'category':category,
-                'form':self.form_class,
-            }
-            return render(request,self.template_name,context=context)
-        messages.error(request,message="No Existe la categoria")
-        return redirect(reverse_lazy("category_index"))
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

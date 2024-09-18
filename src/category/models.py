@@ -8,7 +8,6 @@ class Category(models.Model):
     id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     name = models.CharField(verbose_name="Nombre",max_length=150,blank=False,null=False)
     description = models.TextField(verbose_name="Descripcion",null=True, blank=True)
-    guard_name = models.CharField(verbose_name="Guard Name",max_length=13,blank=False,null=False)
     slug = models.SlugField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -30,7 +29,7 @@ def create_category_slug(sender,instance:Category,*args, **kwargs):
     
     id = str(uuid.uuid4())
     instance.slug = slugify('{}-{}'.format(
-        instance.name,id[:8]
+        instance.name.upper().strip(),id[:8]
     ))
 
 

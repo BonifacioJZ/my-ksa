@@ -31,18 +31,15 @@
         </div>
         <div class="card ">
             <div class="card-header bg-primary text-white">
-                Categoria
+                Categorias
             </div>
             <form method='POST' action=".">
                 {% csrf_token %}
                 <div class="card-body">
                     <div class="row g-3" >
-                        <div class="col-md-6">
+                        <div class="col-12">
                             {% bootstrap_field form.name %}
                         </div> 
-                        <div class="col-md-6">
-                            {% bootstrap_field form.guard_name %}
-                        </div>
                         <div class="col-12">
                             {% bootstrap_field form.description %}
                         </div> 
