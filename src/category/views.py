@@ -10,7 +10,7 @@ class CategoryListView(ListView):
     template_name="category/index.html"
     model = CategoryForms.Meta.model
     context_object_name='category_list'
-    queryset = CategoryForms.Meta.model.objects.all()
+    queryset = CategoryForms.Meta.model.objects.all().order_by('name').values()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

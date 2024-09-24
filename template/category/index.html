@@ -23,8 +23,8 @@
         
     {% if category_list %}
    
-    <div class="m-0 container row justify-content-center align-items-center">
-        <div class="col-9 p-5 text-center">
+    <div class="row">
+        <div class="p-3 text-center">
             <div class="row ">
                 <div class="col-auto text-center">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example"">
@@ -44,7 +44,6 @@
                             <th>
                                 Nombre
                             </th>
-                            <th>Guard Name</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -56,9 +55,6 @@
                             </th>
                             <th>
                                 {{category.name}}
-                            </th>
-                            <th>
-                                {{category.guard_name}}
                             </th>
                             <th>
                                 <div class="btn-group btn-group-sm">
